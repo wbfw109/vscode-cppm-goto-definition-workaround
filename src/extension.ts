@@ -17,14 +17,16 @@ export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
     "cppm.copyModuleNameForQuickOpen",
     async () => {
+      // Get active editor
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
         return;
       }
-
+      // Get current line text
       const position = editor.selection.active;
       const line = editor.document.lineAt(position.line).text.trim();
 
+      // Validate import statement
       if (!line.startsWith("import ")) {
         return;
       }
@@ -33,17 +35,17 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
+      // Extract module name
       let moduleName = match[1].trim();
       if (moduleName.endsWith(";")) {
         moduleName = moduleName.slice(0, -1).trim();
       }
 
-      // Load User settings
+      // Load user configuration
       const config = vscode.workspace.getConfiguration();
       const ignoredPrefixes: string[] =
         config.get("cppm.prefixMatchIgnore") || [];
-
-      // Apply User configuration
+      // Strip ignored prefix
       for (const prefix of ignoredPrefixes) {
         if (moduleName.startsWith(prefix + ".")) {
           moduleName = moduleName.slice(prefix.length + 1); // prefix + '.'
@@ -51,10 +53,11 @@ export function activate(context: vscode.ExtensionContext) {
         }
       }
 
+      // Transform module name
       const transformed = moduleName.replace(/[.:]/g, " ").trim();
       await vscode.env.clipboard.writeText(transformed);
 
-      // Match file
+      // Trigger Quick Open with pasted input
       await vscode.commands.executeCommand("workbench.action.quickOpen");
       await vscode.commands.executeCommand(
         "editor.action.clipboardPasteAction"

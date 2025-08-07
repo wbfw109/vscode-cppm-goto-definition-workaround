@@ -1,9 +1,13 @@
 {
-  "name": "vscode-cppm-goto-definition-workaround",
+  "name": "cppm-goto-definition-workaround",
   "displayName": "C++20 Module Go-to-Definition Workaround",
-  "description": "Provides a workaround for navigating C++20 module imports using Quick Open (Ctrl+P)",
+  "description": "Provides a workaround for navigating C++20 module import statements via the Quick Open functionality (Ctrl+P)",
   "publisher": "wbfw109",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wbfw109/vscode-cppm-goto-definition-workaround.git"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.102.0"
