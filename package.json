@@ -1,0 +1,59 @@
+{
+  "name": "vscode-cppm-goto-definition-workaround",
+  "displayName": "C++20 Module Go-to-Definition Workaround",
+  "description": "Provides a workaround for navigating C++20 module imports using Quick Open (Ctrl+P)",
+  "publisher": "wbfw109",
+  "license": "MIT",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:cppm.copyModuleNameForQuickOpen"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cppm.copyModuleNameForQuickOpen",
+        "title": "Copy Module Name for Quick Open"
+      }
+    ]
+  },
+  "configuration": {
+    "type": "object",
+    "title": "C++ Module Navigation Settings",
+    "properties": {
+      "cppm.prefixMatchIgnore": {
+        "type": "array",
+        "description": "Prefixes to ignore when extracting module names from import statements.",
+        "items": {
+          "type": "string"
+        },
+        "default": []
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.102.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
+    "typescript": "^5.9.2",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
