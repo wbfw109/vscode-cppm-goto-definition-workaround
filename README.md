@@ -48,7 +48,43 @@ foo bar module sub partition
 .../foo/bar/module/sub/partition.cppm
 ```
 
-## Optional Prefix Filtering
+## Command Usage
+
+The extension contributes one command:
+
+- **Command ID**: `cppm.copyModuleNameForQuickOpen`
+- **Command Palette Title**: `C++: Copy Module Name for Quick Open`
+
+You can run it in one of the following ways:
+
+### 1. Via Command Palette
+
+Press `F1` (or `Ctrl+Shift+P`), search for `C++: Copy Module Name for Quick Open`, and run it.
+
+### 2. Via Custom Keybinding
+
+You can assign a keyboard shortcut to run the command.
+Example: Bind it to `F11` by adding the following to your `keybindings.json`:
+
+```jsonc
+{
+  "key": "f11",
+  "command": "cppm.copyModuleNameForQuickOpen",
+  "when": "editorTextFocus"
+}
+```
+
+## Requirements
+
+Your module naming convention should roughly reflect file system structure.
+
+## Extension Settings
+
+The extension contributes the following setting:
+
+### Optional Prefix Filtering
+
+- `cppm.prefixMatchIgnore`: An array of string prefixes to strip from import lines before processing.
 
 Module names do not always map directly to file paths. For example:
 
@@ -76,24 +112,10 @@ In this case, the extension will:
 
 This is useful for large projects that adopt a Java-style naming convention, such as `com.company.module`.
 
-## Requirements
-
-Your module naming convention should roughly reflect file system structure.
-
-## Extension Settings
-
-The extension contributes the following setting:
-
-- `cppm.prefixMatchIgnore`: An array of string prefixes to strip from import lines before processing.
-
 ---
 
 ## Known Issues
 
-## Release Notes
+## License
 
-### 0.0.1
-
-- Initial release
-
----
+[MIT](LICENSE)

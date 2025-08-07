@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/wbfw109/vscode-cppm-goto-definition-workaround.git"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.102.0"
   },
@@ -23,6 +23,7 @@
     "commands": [
       {
         "command": "cppm.copyModuleNameForQuickOpen",
+        "category": "C++",
         "title": "Copy Module Name for Quick Open"
       }
     ]
