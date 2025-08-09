@@ -12,17 +12,18 @@ This behavior likely stems from `clangd`'s limited support for resolving module 
 
 This extension implements a simple workaround under the following assumptions:
 
-- The names of imported modules generally resemble file paths.
+- The project’s directory structure roughly aligns with module naming.
 - Module names use `.` or `:` as partition separators (e.g., `foo.bar:baz`).
-- The project file system structure roughly aligns with module naming.
 
 The extension performs the following steps:
 
-1. When the cursor is on a line that begins with an `import` statement, the extension extracts the remainder of the line after the `import` keyword.
-2. The module name is processed: any occurrences of `.` or `:` are replaced with whitespace.
-3. If a prefix matches any entry in the optional user configuration (`cppm.prefixMatchIgnore`), that prefix is stripped.
-4. The result is copied to the clipboard.
-5. The extension automatically opens the Quick Open dialog (`Ctrl+P`) and pastes the processed module name.
+1. When the cursor is on a line that begins with an `import` statement, the extension extracts the remainder of the line after the `import` keyword and treats it as the **search text**.
+2. If the search text starts with any prefix listed in the optional user configuration (`cppm.prefixMatchIgnore`), that prefix is stripped.
+3. The search text is transformed for `workbench.action.quickOpen`:
+   - Replace all `.` and `:` with spaces.
+   - Add a `" / "` prefix to improve matching by hinting that the first word may represent a folder name.
+4. The transformed search text is copied to the clipboard.
+5. The extension automatically opens the Quick Open dialog (`Ctrl+P`) and pastes the search text.
 
 This enables a quick, keyboard-driven navigation flow—effectively simulating a "Go to Definition" behavior for C++20 module imports.
 
@@ -45,7 +46,7 @@ foo bar module sub partition
 → matches a file path like:
 
 ```
-.../foo/bar/module/sub/partition.cppm
+... / ... foo ... / ... bar ... / ... module ... / ... sub ... / partition.cppm
 ```
 
 ## Command Usage
@@ -76,7 +77,7 @@ Example: Bind it to `F11` by adding the following to your `keybindings.json`:
 
 ## Requirements
 
-Your module naming convention should roughly reflect file system structure.
+The module naming convention should roughly reflect the project's directory structure.
 
 ## Extension Settings
 
@@ -89,7 +90,7 @@ The extension contributes the following setting:
 Module names do not always map directly to file paths. For example:
 
 ```cpp
-import com.example.abc.def.ghi;
+import com.example.image.processing.filters.blur;
 ```
 
 To allow ignoring certain prefixes (like `com.example`), the extension supports a user-defined configuration field:
@@ -106,11 +107,8 @@ In this case, the extension will:
 
 - Check if the module name starts with one of the configured prefixes
 - If matched, strip the prefix (e.g., `com.example.`)
-- Replace all `.` and `:` with spaces in the remaining portion
-- Copy the result to the clipboard
-- Automatically open the Quick Open panel and paste the value
 
-This is useful for large projects that adopt a Java-style naming convention, such as `com.company.module`.
+This is useful for projects that adopt a Java-style naming convention, such as `com.company.module`.
 
 ---
 

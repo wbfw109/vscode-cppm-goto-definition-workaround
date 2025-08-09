@@ -17,12 +17,11 @@ export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
     "cppm.copyModuleNameForQuickOpen",
     async () => {
-      // Get active editor
       const editor = vscode.window.activeTextEditor;
       if (!editor) {
         return;
       }
-      // Get current line text
+
       const position = editor.selection.active;
       const line = editor.document.lineAt(position.line).text.trim();
 
@@ -30,34 +29,37 @@ export function activate(context: vscode.ExtensionContext) {
       if (!line.startsWith("import ")) {
         return;
       }
+
       const match = line.match(/import\s+(.+)/);
       if (!match || !match[1]) {
         return;
       }
 
-      // Extract module name
-      let moduleName = match[1].trim();
-      if (moduleName.endsWith(";")) {
-        moduleName = moduleName.slice(0, -1).trim();
+      // Treat the extracted part as the search text from here on
+      let searchText = match[1].trim();
+      if (searchText.endsWith(";")) {
+        searchText = searchText.slice(0, -1).trim();
       }
 
-      // Load user configuration
+      // Optional: strip ignored prefix
       const config = vscode.workspace.getConfiguration();
       const ignoredPrefixes: string[] =
         config.get("cppm.prefixMatchIgnore") || [];
-      // Strip ignored prefix
       for (const prefix of ignoredPrefixes) {
-        if (moduleName.startsWith(prefix + ".")) {
-          moduleName = moduleName.slice(prefix.length + 1); // prefix + '.'
+        if (searchText.startsWith(prefix + ".")) {
+          searchText = searchText.slice(prefix.length + 1); // remove "prefix."
           break;
         }
       }
 
-      // Transform module name
-      const transformed = moduleName.replace(/[.:]/g, " ").trim();
-      await vscode.env.clipboard.writeText(transformed);
+      // Transform search text for `workbench.action.quickOpen`
+      // - Add " / " prefix to hint that the first token may be a folder
+      // - Replace '.' and ':' (module partitions) with spaces
+      searchText = " / " + searchText.replace(/[.:]/g, " ").trim();
 
-      // Trigger Quick Open with pasted input
+      await vscode.env.clipboard.writeText(searchText);
+
+      // Trigger Quick Open and paste
       await vscode.commands.executeCommand("workbench.action.quickOpen");
       await vscode.commands.executeCommand(
         "editor.action.clipboardPasteAction"

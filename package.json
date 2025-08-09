@@ -4,16 +4,27 @@
   "description": "Provides a workaround for navigating C++20 module import statements via the Quick Open functionality (Ctrl+P)",
   "publisher": "wbfw109",
   "license": "MIT",
+  "pricing": "Free",
   "repository": {
     "type": "git",
     "url": "https://github.com/wbfw109/vscode-cppm-goto-definition-workaround.git"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.102.0"
   },
+  "icon": "icon.png",
   "categories": [
+    "Programming Languages",
     "Other"
+  ],
+  "keywords": [
+    "C++",
+    "C++20",
+    "C++ Modules",
+    "Modules",
+    "Module Partition",
+    "Import"
   ],
   "activationEvents": [
     "onCommand:cppm.copyModuleNameForQuickOpen"
