@@ -1,5 +1,20 @@
 # C++20 Module Go-to-Definition Workaround
 
+- [C++20 Module Go-to-Definition Workaround](#c20-module-go-to-definition-workaround)
+  - [Background](#background)
+  - [Features](#features)
+  - [Requirements](#requirements)
+  - [How It Works](#how-it-works)
+    - [Example Use Case](#example-use-case)
+  - [Command Usage](#command-usage)
+    - [1. Via Command Palette](#1-via-command-palette)
+    - [2. Via Custom Keybinding](#2-via-custom-keybinding)
+  - [Limitation](#limitation)
+  - [Extension Settings](#extension-settings)
+    - [Optional Prefix Filtering](#optional-prefix-filtering)
+  - [Known Issues](#known-issues)
+  - [License](#license)
+
 This provides a workaround for navigating `import` statements in C++20 modules using the **Quick Open** functionality (`Ctrl+P`).
 
 ## Background
@@ -10,11 +25,17 @@ This behavior likely stems from `clangd`'s limited support for resolving module 
 
 ## Features
 
-This extension implements a simple workaround under the following assumptions:
+This extension provides a simple workaround for navigating C++20 module imports and supports:
 
-- The project’s directory structure roughly aligns with module naming.
-- Module names use `.` or `:` as partition separators (e.g., `foo.bar:baz`).
-- Supports both `import` and `export import` statements, including **multi-line module declarations** and **lines containing comments.**
+- Both `import` and `export import` statements.
+- **Multi-line module declarations**.
+- Lines containing comments.
+
+## Requirements
+
+The project’s directory structure should roughly align with module naming.
+
+## How It Works
 
 The extension performs the following steps:
 
@@ -75,10 +96,6 @@ Example: Bind it to `F11` by adding the following to your `keybindings.json`:
   "when": "editorTextFocus"
 }
 ```
-
-## Requirements
-
-The module naming convention should roughly reflect the project's directory structure.
 
 ## Limitation
 

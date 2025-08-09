@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.0.5] - 2025-08-09
+
+### Docs
+
+- Restructured README Features and Requirements sections for clarity.
+
 ## [0.0.4] - 2025-08-09
 
 ### Added
