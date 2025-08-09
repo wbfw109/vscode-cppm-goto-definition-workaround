@@ -1,5 +1,20 @@
 # Change Log
 
+## [0.0.4] - 2025-08-09
+
+### Added
+
+- Extended parsing capabilities to handle:
+  - `export import` statements.
+  - Multi-line module declarations.
+  - Lines containing comments.
+- Limited parsing depth to 5 lines to avoid performance issues.
+
+### Fixed
+
+- Corrected Quick Open search prefix from `" / "` to `"/"`.
+  - Removed unintended leading space introduced in v0.0.3.
+
 ## [0.0.3] - 2025-08-09
 
 - Added `" / "` prefix to the Quick Open search text to improve matching by hinting that the first word may represent a folder name.
