@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.0.7] - 2025-08-13
+
+- Changed command ID from `cppm.copyModuleNameForQuickOpen` to `cppm.searchModuleInQuickOpen` to better reflect its behavior.
+
 ## [0.0.6] - 2025-08-13
 
 ### Fixed

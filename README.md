@@ -7,8 +7,8 @@
   - [How It Works](#how-it-works)
     - [Example Use Case](#example-use-case)
   - [Command Usage](#command-usage)
-    - [1. Via Command Palette](#1-via-command-palette)
-    - [2. Via Custom Keybinding](#2-via-custom-keybinding)
+    - [Via Command Palette](#via-command-palette)
+    - [Via Custom Keybinding](#via-custom-keybinding)
   - [Limitation](#limitation)
   - [Extension Settings](#extension-settings)
     - [Optional Prefix Filtering](#optional-prefix-filtering)
@@ -73,23 +73,23 @@ foo bar module sub partition
 → matches a file path like:
 
 ```
-... /foo ... / ... bar ... / ... module ... / ... sub ... / partition.cppm
+... /foo/bar/module/sub/partition.cppm
 ```
 
 ## Command Usage
 
 The extension contributes one command:
 
-- **Command ID**: `cppm.copyModuleNameForQuickOpen`
-- **Command Palette Title**: `C++: Copy Module Name for Quick Open`
+- **Command ID**: `cppm.searchModuleInQuickOpen`
+- **Command Palette Title**: `C++: Search Module in Quick Open`
 
 You can run it in one of the following ways:
 
-### 1. Via Command Palette
+### Via Command Palette
 
-Press `F1` (or `Ctrl+Shift+P`), search for `C++: Copy Module Name for Quick Open`, and run it.
+Press `F1` (or `Ctrl+Shift+P`), search for `C++: Search Module in Quick Open`, and run it.
 
-### 2. Via Custom Keybinding
+### Via Custom Keybinding
 
 You can assign a keyboard shortcut to run the command.
 Example: Bind it to `F11` by adding the following to your `keybindings.json`:
@@ -97,7 +97,7 @@ Example: Bind it to `F11` by adding the following to your `keybindings.json`:
 ```jsonc
 {
   "key": "f11",
-  "command": "cppm.copyModuleNameForQuickOpen",
+  "command": "cppm.searchModuleInQuickOpen",
   "when": "editorTextFocus"
 }
 ```
