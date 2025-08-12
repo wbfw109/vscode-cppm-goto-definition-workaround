@@ -58,8 +58,8 @@ export function activate(context: vscode.ExtensionContext) {
 
       // Transform search text for `workbench.action.quickOpen`
       // - Add "/" prefix to hint that the first token may be a folder
-      // - Replace '.' and ':' (module partitions) with spaces
-      searchText = "/" + searchText.replace(/[.:]/g, " ").trim();
+      // - Replace '.' and ':' (module partitions) with "/"
+      searchText = "/" + searchText.replace(/[.:]/g, "/").trim();
 
       await vscode.env.clipboard.writeText(searchText);
 

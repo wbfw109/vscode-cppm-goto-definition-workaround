@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.0.6] - 2025-08-13
+
+### Fixed
+
+- Corrected Quick Open search to replace `.` and `:` with `/` instead of space for accurate file path matching.
+
 ## [0.0.5] - 2025-08-09
 
 ### Docs

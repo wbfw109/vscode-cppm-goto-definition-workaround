@@ -40,11 +40,16 @@ The project’s directory structure should roughly align with module naming.
 The extension performs the following steps:
 
 1. When the cursor is on a line that begins with an `import` statement, the extension extracts the remainder of the line after the `import` keyword and treats it as the **search text**.
+
 2. If the search text starts with any prefix listed in the optional user configuration (`cppm.prefixMatchIgnore`), that prefix is stripped.
+
 3. The search text is transformed for `workbench.action.quickOpen`:
+
    - Replace all `.` and `:` with spaces.
    - Add a `"/"` prefix to improve matching by hinting that the first word may represent a folder name.
+
 4. The transformed search text is copied to the clipboard.
+
 5. The extension automatically opens the Quick Open dialog (`Ctrl+P`) and pastes the search text.
 
 This enables a quick, keyboard-driven navigation flow—effectively simulating a "Go to Definition" behavior for C++20 module imports.

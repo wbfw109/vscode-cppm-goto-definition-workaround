@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/wbfw109/vscode-cppm-goto-definition-workaround.git"
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.102.0"
   },
